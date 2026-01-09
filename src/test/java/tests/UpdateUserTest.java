@@ -28,7 +28,7 @@ public class UpdateUserTest {
     // Контейнер для хранения данных пользователя
     private DataContainer dataContainer = new DataContainer();
 
-    // Константы для путей (эндпоинты)
+    // Эндпоинты
     private final String REGISTER_ENDPOINT = "/auth/register";
     private final String UPDATE_PROFILE_ENDPOINT = "/auth/user";
     private final String DELETE_USER_ENDPOINT = "/auth/user";
@@ -52,8 +52,23 @@ public class UpdateUserTest {
         }
     }
 
-    // Удаление пользователя после всех тестов
-    @AfterAll
+    // Регистрация нового пользователя перед каждым тестом
+    @BeforeEach
+    public void beforeEach() {
+        // Генерируем уникальные данные для нового пользователя
+        String uniqueEmail = generateUniqueEmail();
+        String password = new Faker().internet().password();
+        String name = new Faker().name().fullName();
+
+        // Регистрируем нового пользователя и получаем токен
+        CreateUserResponse registrationResponse = registerNewUser(uniqueEmail, password, name);
+        dataContainer.token = registrationResponse.getAccessToken(); // Берём токен из ответа регистрации
+        dataContainer.email = uniqueEmail; // Сохраняем адрес электронной почты
+        dataContainer.name = name; // Сохраняем имя пользователя
+    }
+
+    // Удаление пользователя после каждого теста
+    @AfterEach
     public void cleanup() {
         if (!dataContainer.token.isBlank()) {
             // Формируем заголовок Authorization
@@ -74,21 +89,11 @@ public class UpdateUserTest {
     @Test
     @Description("Редактирование данных без авторизации недопустимо")
     public void changeDataWithoutAuth() {
-        // Создаём нового пользователя
-        String uniqueEmail = generateUniqueEmail();
-        String password = new Faker().internet().password();
-        String name = new Faker().name().fullName();
-
-        // Регистрируем нового пользователя и получаем токен
-        CreateUserResponse registrationResponse = registerNewUser(uniqueEmail, password, name);
-        dataContainer.token = registrationResponse.getAccessToken(); // Берём токен из ответа регистрации
-        dataContainer.email = uniqueEmail; // Сохраняем адрес электронной почты
-
         // Пробуем обновить данные без авторизации
         UpdateUserRequest updateRequest = new UpdateUserRequest(
                 "new-" + dataContainer.email, // Используем сохранённое значение email
                 "new-password",
-                "new-name"
+                "new-" + dataContainer.name // Используем сохранённое значение name
         );
 
         given()
@@ -96,49 +101,34 @@ public class UpdateUserTest {
                 .body(updateRequest)
                 .patch(UPDATE_PROFILE_ENDPOINT)
                 .then()
-                .statusCode(401)                   // Проверяем статус-код
-                .body("success", equalTo(false))   // Проверяем успех
-                .body("message", equalTo("You should be authorised")); // Сообщение об ошибке
+                .statusCode(401)
+                .body("success", equalTo(false))
+                .body("message", equalTo("You should be authorised"));
     }
 
     // Редактирование данных с авторизацией
     @Test
     @Description("Редактирование данных с авторизацией проходит успешно")
     public void changeDataWithAuth() {
-        // Генерируем уникальные данные для нового пользователя
-        String uniqueEmail = generateUniqueEmail();
-        String password = new Faker().internet().password();
-        String name = new Faker().name().fullName();
-
-        // Регистрируем нового пользователя и получаем токен
-        CreateUserResponse registrationResponse = registerNewUser(uniqueEmail, password, name);
-        dataContainer.token = registrationResponse.getAccessToken(); // Берём токен из ответа регистрации
-        dataContainer.email = uniqueEmail; // Сохраняем адрес электронной почты
-
         // Готовим данные для обновления
         String updatedEmail = "updated-" + dataContainer.email;
         String updatedPassword = "updated-password";
-        String updatedName = "Updated Name";
+        String updatedName = "updated-" + dataContainer.name;
 
         UpdateUserRequest updateRequest = new UpdateUserRequest(updatedEmail, updatedPassword, updatedName);
-
-        // Отображаем тело запроса и токен для диагностики
-        System.out.println("Токен: " + dataContainer.token);
-        System.out.println("Переданный запрос: " + updateRequest.toString());
 
         // Отправляем запрос на обновление данных с авторизацией
         UpdateUserResponse updateResponse = given()
                 .log().everything() // Полное логирование запроса
-                .header("Authorization", dataContainer.token) // Убираем лишний "Bearer"
-                .header("User-Agent", "insomnia/12.2.0")
+                .header("Authorization", dataContainer.token) // Убираем лишний Bearer
                 .contentType("application/json")
                 .body(updateRequest)
                 .when()
                 .patch(UPDATE_PROFILE_ENDPOINT)
                 .then()
                 .log().everything() // Полное логирование ответа
-                .statusCode(200)              // Проверяем статус-код
-                .body("success", equalTo(true))  // Проверяем успешность
+                .statusCode(200)
+                .body("success", equalTo(true))
                 .extract().as(UpdateUserResponse.class);
 
         // Проверяем, что данные пользователя обновились
@@ -165,5 +155,6 @@ public class UpdateUserTest {
     private static class DataContainer {
         public String token = ""; // Токен для удаления пользователя
         public String email = ""; // Электронная почта пользователя
+        public String name = ""; // Имя пользователя
     }
 }
