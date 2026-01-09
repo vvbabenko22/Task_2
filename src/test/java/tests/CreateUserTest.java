@@ -17,7 +17,8 @@ import static org.hamcrest.Matchers.equalTo;
 
 // Указываем, что порядок тестов определяется аннотацией @Order
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS) // Общие настройки для всех тестов
+// Общие настройки для всех тестов
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CreateUserTest {
 
     // Базовый URL
