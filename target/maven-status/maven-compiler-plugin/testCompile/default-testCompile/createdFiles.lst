@@ -1,0 +1,5 @@
+test\models\CreateUserRequest.class
+test\models\CreateUserResponse.class
+tests\CreateUserTest.class
+tests\CreateUserTest$DataContainer.class
+test\models\UserInfo.class

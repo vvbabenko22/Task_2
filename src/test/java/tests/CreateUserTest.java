@@ -15,6 +15,8 @@ import test.models.UserInfo;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+// Указываем, что порядок тестов определяется аннотацией @Order
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // Общие настройки для всех тестов
 public class CreateUserTest {
 
@@ -34,7 +36,6 @@ public class CreateUserTest {
     }
 
     // Чтение конфигов перед тестами
-
     @BeforeAll
     public static void setup() throws IOException {
         Properties props = new Properties();
@@ -49,7 +50,6 @@ public class CreateUserTest {
     }
 
     // Удаление пользователя после всех тестов
-
     @AfterAll
     public void cleanup() {
         if (!dataContainer.token.isBlank()) {
@@ -66,9 +66,8 @@ public class CreateUserTest {
     }
 
     // Проверка успешной регистрации пользователя
-
     @Test
-    @Order(1) // Первый исполняемый тест
+    @Order(1) // Первым выполняется этот тест
     @Description("Пользователя можно успешно зарегистрировать")
     public void canCreateUserSuccessfully() {
         // Генерируем уникальные данные для регистрации
@@ -86,9 +85,8 @@ public class CreateUserTest {
     }
 
     // Невозможно создать двух одинаковых пользователей
-
     @Test
-    @Order(2)
+    @Order(2) // Вторым выполняется этот тест
     @Description("Невозможно создать двух одинаковых пользователей")
     public void cannotCreateDuplicateUsers() {
         // Повторная регистрация того же пользователя с существующими данными
@@ -96,9 +94,8 @@ public class CreateUserTest {
     }
 
     // Проверка обязательности полей
-
     @Test
-    @Order(3)
+    @Order(3) // Третьим выполняется этот тест
     @Description("Необходимо передать все обязательные поля")
     public void allMandatoryFieldsAreRequired() {
         // Регистрация с отсутствующим обязательным параметром
@@ -106,7 +103,6 @@ public class CreateUserTest {
     }
 
     // Регистрация пользователя
-
     @Step("Регистрация пользователя")
     private CreateUserResponse performRegistration(String email, String password, String name) {
         CreateUserRequest request = new CreateUserRequest(email, password, name);
@@ -125,7 +121,6 @@ public class CreateUserTest {
     }
 
     // Повторная регистрация пользователя
-
     @Step("Повторная регистрация пользователя")
     private void attemptDuplicateRegistration(String email, String password, String name) {
         CreateUserRequest request = new CreateUserRequest(email, password, name);

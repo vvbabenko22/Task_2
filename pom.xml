@@ -15,19 +15,21 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
     <dependencies>
-        <!-- JUnit -->
+        <!-- JUnit Jupiter API -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- JUnit Jupiter Engine for running tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- JUnit Parameters support -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
@@ -35,21 +37,21 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Logback -->
+        <!-- Logback logging framework -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.4.5</version>
         </dependency>
 
-        <!-- Jackson Databind для работы с POJO -->
+        <!-- Jackson library for JSON serialization/deserialization -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
 
-        <!-- Rest Assured -->
+        <!-- REST Assured for HTTP testing -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -57,7 +59,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Faker -->
+        <!-- JavaFaker for generating fake data -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
@@ -65,7 +67,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- Project Lombok annotations -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -73,7 +75,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Allure -->
+        <!-- Allure reporting tool integration -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
@@ -81,7 +83,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- AssertJ -->
+        <!-- AssertJ assertions -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -91,7 +93,7 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- Compiler settings -->
+            <!-- Compiling sources to Java 11 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -101,7 +103,8 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-            <!-- Running tests with proper discovery rules -->
+
+            <!-- Running unit tests using Surefire plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -115,7 +118,8 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-            <!-- Generating Allure reports -->
+
+            <!-- Generating Allure report after tests execution -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>

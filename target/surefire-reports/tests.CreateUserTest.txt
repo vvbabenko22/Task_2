@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: tests.CreateUserTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.523 s <<< FAILURE! - in tests.CreateUserTest
+tests.CreateUserTest.cannotCreateDuplicateUsers  Time elapsed: 2.258 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+JSON path message doesn't match.
+Expected: User already exists
+  Actual: Email, password and name are required fields
+
+	at tests.CreateUserTest.attemptDuplicateRegistration(CreateUserTest.java:151)
+	at tests.CreateUserTest.cannotCreateDuplicateUsers(CreateUserTest.java:106)
+
