@@ -15,10 +15,7 @@ import test.models.GetOrdersResponse;
 import test.models.OrderItem;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class OrderUnauthorizedTest {
 
@@ -75,11 +72,19 @@ class OrderUnauthorizedTest {
     @Description("Тест создания нового заказа")
     public void createNewOrder() {
         // Формирование запроса на создание заказа
-        OrderUnauthorizedRequest requestBody = new OrderUnauthorizedRequest(new String[] {"61c0c5a71d1f82001bdaaa6d"});
+        OrderUnauthorizedRequest requestBody = new OrderUnauthorizedRequest(new String[] {"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa70", "61c0c5a71d1f82001bdaaa72"});
 
         // Отправляем запрос и проверяем успешность
         OrderUnauthorizedResponse response = createOrder(requestBody);
         assertEquals(response.isSuccess(), true, "Заказ не был успешно создан.");
+
+        // Проверяем наличие всех необходимых полей в ответе
+        assertNotNull(response.getName(), "Название заказа не установлено.");
+        assertNotNull(response.getOrder(), "Поле 'order' отсутствует в ответе.");
+        assertNotNull(response.getOrder().getNumber(), "Номер заказа не установлен.");
+
+        // Проверяем, что название заказа соответствует ожидаемому значению
+        assertEquals(response.getName(), "Метеоритный флюоресцентный spicy бургер", "Название заказа не соответствует ожидаемому значению.");
     }
 
     // Тест получения списка заказов
@@ -110,9 +115,6 @@ class OrderUnauthorizedTest {
         } else {
             fail("Нет ни одного заказа в ответе.");
         }
-    }
-
-    private void assertTrue(boolean b, String s) {
     }
 
     // Создание заказа с некорректными ингредиентами
