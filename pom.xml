@@ -51,6 +51,13 @@
             <version>2.15.2</version>
         </dependency>
 
+        <!-- Support for Java 8 dates and times (JSR-310) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
         <!-- REST Assured for HTTP testing -->
         <dependency>
             <groupId>io.rest-assured</groupId>

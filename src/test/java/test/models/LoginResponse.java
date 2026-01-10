@@ -4,14 +4,14 @@ import lombok.Data;
 
 @Data
 public class LoginResponse {
-    private Integer statusCode; // Новое поле для хранения статуса ответа
+    private Integer statusCode;
     private Boolean success;
     private String accessToken;
     private String refreshToken;
     private UserInfo user;
     private String message;
 
-    // Геттеры и сеттеры (используется lombok)
+    // Геттеры и сеттеры
 
     public Integer getStatusCode() {
         return statusCode;
@@ -21,5 +21,4 @@ public class LoginResponse {
         this.statusCode = statusCode;
     }
 
-    // Другие геттеры и сеттеры генерируются автоматически с помощью lombok
 }
