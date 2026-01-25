@@ -3,7 +3,11 @@ package tests;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.Assertions;
 import com.github.javafaker.Faker;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,17 +19,12 @@ import test.models.UserInfo;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-// Указываем, что порядок тестов определяется аннотацией @Order
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-// Общие настройки для всех тестов
+// Общий класс настроек для всех тестов
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CreateUserTest {
 
     // Базовый URL
     private static String BASE_URL;
-
-    // Контейнер для хранения данных пользователя
-    private DataContainer dataContainer = new DataContainer();
 
     // Эндпоинты
     private final String REGISTER_ENDPOINT = "/auth/register";
@@ -36,7 +35,7 @@ public class CreateUserTest {
         return new Faker().internet().emailAddress() + "_" + UUID.randomUUID().toString();
     }
 
-    // Чтение конфигов перед тестами
+    // Чтение конфигов перед всеми тестами
     @BeforeAll
     public static void setup() throws IOException {
         Properties props = new Properties();
@@ -50,57 +49,72 @@ public class CreateUserTest {
         }
     }
 
-    // Удаление пользователя после всех тестов
-    @AfterAll
+    // Очистка после каждого теста
+    @AfterEach
     public void cleanup() {
-        if (!dataContainer.token.isBlank()) {
-            // Формируем заголовок Authorization
-            String headerValue = dataContainer.token.startsWith("Bearer ") ? dataContainer.token : "Bearer " + dataContainer.token;
-
-            given()
-                    .header("Authorization", headerValue)
-                    .delete(DELETE_USER_ENDPOINT)
-                    .then()
-                    .statusCode(202); // Ожидаем успешное удаление
-            System.out.println("Пользователь успешно удалён!");
+        try {
+            DeleteRegisteredUser();
+        } catch (Throwable e) {
+            // Игнорируем исключение, если оно возникло при удалении пользователя
         }
     }
 
     // Проверка успешной регистрации пользователя
     @Test
-    @Order(1) // Первым выполняется этот тест
     @Description("Пользователя можно успешно зарегистрировать")
     public void canCreateUserSuccessfully() {
-        // Генерируем уникальные данные для регистрации
+        // Создаем уникальный аккаунт
         String uniqueEmail = generateUniqueEmail();
         String password = new Faker().internet().password();
         String name = new Faker().name().fullName();
 
-        // Регистрируем пользователя
+        // Регистрируемся
         CreateUserResponse response = performRegistration(uniqueEmail, password, name);
 
-        // Сохраняем имя и email из ответа метода
-        dataContainer.registeredEmail = response.getUser().getEmail();
-        dataContainer.registeredName = response.getUser().getName();
-        dataContainer.token = response.getAccessToken();
+        // Удостоверимся, что токен и данные были получены
+        Assertions.assertFalse(response.getAccessToken().isEmpty());
+        Assertions.assertEquals(uniqueEmail, response.getUser().getEmail());
+        Assertions.assertEquals(name, response.getUser().getName());
     }
 
     // Невозможно создать двух одинаковых пользователей
     @Test
-    @Order(2) // Вторым выполняется этот тест
     @Description("Невозможно создать двух одинаковых пользователей")
     public void cannotCreateDuplicateUsers() {
-        // Повторная регистрация того же пользователя с существующими данными
-        attemptDuplicateRegistration(dataContainer.registeredEmail, new Faker().internet().password(), dataContainer.registeredName);
+        // Создаем уникальный аккаунт
+        String uniqueEmail = generateUniqueEmail();
+        String password = new Faker().internet().password();
+        String name = new Faker().name().fullName();
+
+        // Сначала регистрируем пользователя
+        performRegistration(uniqueEmail, password, name);
+
+        // Пробуем повторить регистрацию с теми же данными
+        attemptDuplicateRegistration(uniqueEmail, password, name);
     }
 
     // Проверка обязательности полей
     @Test
-    @Order(3) // Третьим выполняется этот тест
     @Description("Необходимо передать все обязательные поля")
     public void allMandatoryFieldsAreRequired() {
-        // Регистрация с отсутствующим обязательным параметром
+        // Пробуем зарегистрироваться с пустым паролем и именем
         attemptIncompleteRegistration(generateUniqueEmail(), "", "");
+    }
+
+    // Метод удаления зарегистрированного пользователя
+    private void DeleteRegisteredUser() {
+        CreateUserResponse lastUserData = performRegistration("", "", "");
+        if (!lastUserData.getAccessToken().isEmpty()) { // проверка, есть ли токен
+            String headerValue = lastUserData.getAccessToken().startsWith("Bearer ") ?
+                    lastUserData.getAccessToken() :
+                    "Bearer " + lastUserData.getAccessToken();
+
+            given()
+                    .header("Authorization", headerValue)
+                    .delete(DELETE_USER_ENDPOINT)
+                    .then()
+                    .statusCode(202); // ожидаем успешного удаления
+        }
     }
 
     // Регистрация пользователя
@@ -149,12 +163,5 @@ public class CreateUserTest {
                 .statusCode(403)
                 .body("success", equalTo(false))
                 .body("message", equalTo("Email, password and name are required fields"));
-    }
-
-    // Вспомогательный класс для хранения данных пользователя
-    private static class DataContainer {
-        public String registeredEmail = "";
-        public String registeredName = "";
-        public String token = "";
     }
 }
