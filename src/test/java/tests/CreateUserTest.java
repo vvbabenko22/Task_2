@@ -9,13 +9,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.Assertions;
 import com.github.javafaker.Faker;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.UUID;
+
 import test.models.CreateUserRequest;
 import test.models.CreateUserResponse;
 import test.models.UserInfo;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 

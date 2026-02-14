@@ -5,15 +5,18 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.*;
 import com.github.javafaker.Faker;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.UUID;
+
 import test.models.CreateUserRequest;
 import test.models.CreateUserResponse;
 import test.models.UpdateUserRequest;
 import test.models.UpdateUserResponse;
 import test.models.UserInfo;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -132,8 +135,8 @@ public class UpdateUserTest {
                 .extract().as(UpdateUserResponse.class);
 
         // Проверяем, что данные пользователя обновились
-        assertEquals(updateResponse.getUser().getEmail(), updatedEmail);
-        assertEquals(updateResponse.getUser().getName(), updatedName);
+        assertEquals(updatedEmail, updateResponse.getUser().getEmail());
+        assertEquals(updatedName, updateResponse.getUser().getName());
     }
 
     // Регистрация нового пользователя

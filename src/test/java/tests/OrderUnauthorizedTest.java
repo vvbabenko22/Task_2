@@ -5,14 +5,13 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterEach;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import test.models.OrderUnauthorizedRequest;
-import test.models.OrderUnauthorizedResponse;
-import test.models.GetOrdersResponse;
-import test.models.OrderItem;
+
+import test.models.*;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +23,7 @@ class OrderUnauthorizedTest {
 
     // Эндпоинты
     private final String CREATE_ORDER_ENDPOINT = "/orders";
-    private final String FETCH_ORDERS_ENDPOINT = "/orders/all";
+    private final String FETCH_ORDERS_ENDPOINT = "/orders";
 
     // Чтение конфигов перед тестами
     @BeforeAll
@@ -41,7 +40,6 @@ class OrderUnauthorizedTest {
     }
 
     // Создание нового заказа
-
     @Step("Создание нового заказа")
     private OrderUnauthorizedResponse createOrder(OrderUnauthorizedRequest request) {
         return given()
@@ -56,15 +54,15 @@ class OrderUnauthorizedTest {
 
     // Получение списка заказов
     @Step("Получение списка заказов")
-    private GetOrdersResponse fetchOrders() {
+    private GetOrdersUnauthorizedResponse fetchOrders() {
         return given()
                 .contentType("application/json")
                 .when()
                 .get(FETCH_ORDERS_ENDPOINT)
                 .then()
-                .statusCode(200)
+                .statusCode(401)
                 .log().all()
-                .extract().as(GetOrdersResponse.class);
+                .extract().as(GetOrdersUnauthorizedResponse.class);
     }
 
     // Тест создания нового заказа
@@ -72,7 +70,7 @@ class OrderUnauthorizedTest {
     @Description("Тест создания нового заказа")
     public void createNewOrder() {
         // Формирование запроса на создание заказа
-        OrderUnauthorizedRequest requestBody = new OrderUnauthorizedRequest(new String[] {"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa70", "61c0c5a71d1f82001bdaaa72"});
+        OrderUnauthorizedRequest requestBody = new OrderUnauthorizedRequest(new String[]{"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa70", "61c0c5a71d1f82001bdaaa72"});
 
         // Отправляем запрос и проверяем успешность
         OrderUnauthorizedResponse response = createOrder(requestBody);
@@ -84,7 +82,7 @@ class OrderUnauthorizedTest {
         assertNotNull(response.getOrder().getNumber(), "Номер заказа не установлен.");
 
         // Проверяем, что название заказа соответствует ожидаемому значению
-        assertEquals(response.getName(), "Метеоритный флюоресцентный spicy бургер", "Название заказа не соответствует ожидаемому значению.");
+        assertEquals("Метеоритный флюоресцентный spicy бургер", response.getName(), "Название заказа не соответствует ожидаемому значению.");
     }
 
     // Тест получения списка заказов
@@ -92,29 +90,13 @@ class OrderUnauthorizedTest {
     @Description("Тест получения списка заказов")
     public void fetchOrdersAndCheck() {
         // Получаем список заказов
-        GetOrdersResponse fetchedOrders = fetchOrders();
+        GetOrdersUnauthorizedResponse unauthorizedResponse = fetchOrders();
 
-        // Проверяем наличие обязательных полей в ответе
-        assertNotNull(fetchedOrders.getTotal(), "Поле 'total' отсутствует в ответе.");
-        assertNotNull(fetchedOrders.getTotalToday(), "Поле 'totalToday' отсутствует в ответе.");
+        // Проверяем, что запрос не был выполнен успешно
+        assertFalse(unauthorizedResponse.isSuccess(), "Статус успеха не должен быть равен true.");
 
-        // Дополнительная проверка: убедимся, что значения не нулевые и положительные
-        assertTrue(fetchedOrders.getTotal() > 0, "Значение поля 'total' должно быть положительным числом.");
-        assertTrue(fetchedOrders.getTotalToday() >= 0, "Значение поля 'totalToday' должно быть неотрицательным числом.");
-
-        // Проверяем наличие параметров первого заказа в списке
-        if (!fetchedOrders.getOrders().isEmpty()) {
-            OrderItem firstOrder = fetchedOrders.getOrders().get(0);
-            assertNotNull(firstOrder.get_id(), "ID первого заказа не установлен.");
-            assertFalse(firstOrder.getIngredients().isEmpty(), "Список ингредиентов первого заказа пустой.");
-            assertNotNull(firstOrder.getStatus(), "Статус первого заказа не установлен.");
-            assertNotNull(firstOrder.getName(), "Название первого заказа не установлено.");
-            assertNotNull(firstOrder.getCreatedAt(), "Время создания первого заказа не установлено.");
-            assertNotNull(firstOrder.getUpdatedAt(), "Время обновления первого заказа не установлено.");
-            assertNotNull(firstOrder.getNumber(), "Номер первого заказа не установлен.");
-        } else {
-            fail("Нет ни одного заказа в ответе.");
-        }
+        // Проверяем наличие сообщения об ошибке
+        assertEquals("You should be authorised", unauthorizedResponse.getMessage(), "Сообщение об ошибке не соответствует ожидаемому значению.");
     }
 
     // Создание заказа с некорректными ингредиентами
@@ -122,7 +104,7 @@ class OrderUnauthorizedTest {
     @Description("Негативный тест: создание заказа с некорректными ингредиентами")
     public void createOrderWithIncorrectIngredients() {
         // Подготовим запрос с некорректными ингредиентами
-        OrderUnauthorizedRequest incorrectRequest = new OrderUnauthorizedRequest(new String[] {"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa70", "61c0c5a71d1f82001bdaaa7"}); // Третий хэш некорректный
+        OrderUnauthorizedRequest incorrectRequest = new OrderUnauthorizedRequest(new String[]{"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa70", "61c0c5a71d1f82001bdaaa7"}); // Третий хэш некорректный
 
         // Отправляем запрос и проверяем, что пришел статус 500
         given()
