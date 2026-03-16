@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="tests.OrderUnauthorizedTest" time="3.336" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.class.path" value="C:\Users\USER\IdeaProjects\Task_2\target\test-classes;C:\Users\USER\IdeaProjects\Task_2\target\classes;C:\Users\USER\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\USER\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\USER\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\USER\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\USER\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\USER\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\USER\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-classic\1.4.5\logback-classic-1.4.5.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-core\1.4.5\logback-core-1.4.5.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\2.0.4\slf4j-api-2.0.4.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.2\jackson-databind-2.15.2.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.2\jackson-annotations-2.15.2.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.2\jackson-core-2.15.2.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.2\jackson-datatype-jsr310-2.15.2.jar;C:\Users\USER\.m2\repository\io\rest-assured\rest-assured\4.5.1\rest-assured-4.5.1.jar;C:\Users\USER\.m2\repository\org\codehaus\groovy\groovy\3.0.9\groovy-3.0.9.jar;C:\Users\USER\.m2\repository\org\codehaus\groovy\groovy-xml\3.0.9\groovy-xml-3.0.9.jar;C:\Users\USER\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\USER\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\USER\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\USER\.m2\repository\commons-codec\commons-codec\1.11\commons-codec-1.11.jar;C:\Users\USER\.m2\repository\org\apache\httpcomponents\httpmime\4.5.13\httpmime-4.5.13.jar;C:\Users\USER\.m2\repository\org\hamcrest\hamcrest\2.1\hamcrest-2.1.jar;C:\Users\USER\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2.1\tagsoup-1.2.1.jar;C:\Users\USER\.m2\repository\io\rest-assured\json-path\4.5.1\json-path-4.5.1.jar;C:\Users\USER\.m2\repository\org\codehaus\groovy\groovy-json\3.0.9\groovy-json-3.0.9.jar;C:\Users\USER\.m2\repository\io\rest-assured\rest-assured-common\4.5.1\rest-assured-common-4.5.1.jar;C:\Users\USER\.m2\repository\io\rest-assured\xml-path\4.5.1\xml-path-4.5.1.jar;C:\Users\USER\.m2\repository\com\github\javafaker\javafaker\1.0.2\javafaker-1.0.2.jar;C:\Users\USER\.m2\repository\org\apache\commons\commons-lang3\3.5\commons-lang3-3.5.jar;C:\Users\USER\.m2\repository\org\yaml\snakeyaml\1.23\snakeyaml-1.23-android.jar;C:\Users\USER\.m2\repository\com\github\mifmif\generex\1.0.2\generex-1.0.2.jar;C:\Users\USER\.m2\repository\dk\brics\automaton\automaton\1.11-8\automaton-1.11-8.jar;C:\Users\USER\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18.24.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-junit5\2.19.0\allure-junit5-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-junit-platform\2.19.0\allure-junit-platform-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-java-commons\2.19.0\allure-java-commons-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-model\2.19.0\allure-model-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-test-filter\2.19.0\allure-test-filter-2.19.0.jar;C:\Users\USER\.m2\repository\org\junit\platform\junit-platform-launcher\1.8.2\junit-platform-launcher-1.8.2.jar;C:\Users\USER\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\USER\.m2\repository\net\bytebuddy\byte-buddy\1.12.21\byte-buddy-1.12.21.jar;"/>
+    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
+    <property name="user.timezone" value="Asia/Novosibirsk"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="RU"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Amazon Corretto\jdk11.0.30_7\bin"/>
+    <property name="sun.java.command" value="C:\Users\USER\AppData\Local\Temp\surefire30693828714624370\surefirebooter1599406324890865945.jar C:\Users\USER\AppData\Local\Temp\surefire30693828714624370 2026-02-14T20-12-25_460-jvmRun1 surefire9654185112477189354tmp surefire_07195535677069312054tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\USER\IdeaProjects\Task_2\target\test-classes;C:\Users\USER\IdeaProjects\Task_2\target\classes;C:\Users\USER\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\USER\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\USER\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\USER\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\USER\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\USER\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\USER\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-classic\1.4.5\logback-classic-1.4.5.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-core\1.4.5\logback-core-1.4.5.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\2.0.4\slf4j-api-2.0.4.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.2\jackson-databind-2.15.2.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.2\jackson-annotations-2.15.2.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.2\jackson-core-2.15.2.jar;C:\Users\USER\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.2\jackson-datatype-jsr310-2.15.2.jar;C:\Users\USER\.m2\repository\io\rest-assured\rest-assured\4.5.1\rest-assured-4.5.1.jar;C:\Users\USER\.m2\repository\org\codehaus\groovy\groovy\3.0.9\groovy-3.0.9.jar;C:\Users\USER\.m2\repository\org\codehaus\groovy\groovy-xml\3.0.9\groovy-xml-3.0.9.jar;C:\Users\USER\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\USER\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\USER\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\USER\.m2\repository\commons-codec\commons-codec\1.11\commons-codec-1.11.jar;C:\Users\USER\.m2\repository\org\apache\httpcomponents\httpmime\4.5.13\httpmime-4.5.13.jar;C:\Users\USER\.m2\repository\org\hamcrest\hamcrest\2.1\hamcrest-2.1.jar;C:\Users\USER\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2.1\tagsoup-1.2.1.jar;C:\Users\USER\.m2\repository\io\rest-assured\json-path\4.5.1\json-path-4.5.1.jar;C:\Users\USER\.m2\repository\org\codehaus\groovy\groovy-json\3.0.9\groovy-json-3.0.9.jar;C:\Users\USER\.m2\repository\io\rest-assured\rest-assured-common\4.5.1\rest-assured-common-4.5.1.jar;C:\Users\USER\.m2\repository\io\rest-assured\xml-path\4.5.1\xml-path-4.5.1.jar;C:\Users\USER\.m2\repository\com\github\javafaker\javafaker\1.0.2\javafaker-1.0.2.jar;C:\Users\USER\.m2\repository\org\apache\commons\commons-lang3\3.5\commons-lang3-3.5.jar;C:\Users\USER\.m2\repository\org\yaml\snakeyaml\1.23\snakeyaml-1.23-android.jar;C:\Users\USER\.m2\repository\com\github\mifmif\generex\1.0.2\generex-1.0.2.jar;C:\Users\USER\.m2\repository\dk\brics\automaton\automaton\1.11-8\automaton-1.11-8.jar;C:\Users\USER\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18.24.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-junit5\2.19.0\allure-junit5-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-junit-platform\2.19.0\allure-junit-platform-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-java-commons\2.19.0\allure-java-commons-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-model\2.19.0\allure-model-2.19.0.jar;C:\Users\USER\.m2\repository\io\qameta\allure\allure-test-filter\2.19.0\allure-test-filter-2.19.0.jar;C:\Users\USER\.m2\repository\org\junit\platform\junit-platform-launcher\1.8.2\junit-platform-launcher-1.8.2.jar;C:\Users\USER\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\USER\.m2\repository\net\bytebuddy\byte-buddy\1.12.21\byte-buddy-1.12.21.jar;"/>
+    <property name="allure.results.directory" value="C:\Users\USER\IdeaProjects\Task_2\target/allure-results"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\USER"/>
+    <property name="user.language" value="ru"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-01-20"/>
+    <property name="java.home" value="C:\Program Files\Amazon Corretto\jdk11.0.30_7"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\USER\IdeaProjects\Task_2"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\USER\AppData\Local\Temp\surefire30693828714624370\surefirebooter1599406324890865945.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.30+7-LTS"/>
+    <property name="user.name" value="USER"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1251"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Corretto-11.0.30.7.1"/>
+    <property name="localRepository" value="C:\Users\USER\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-11/issues/"/>
+    <property name="java.io.tmpdir" value="C:\Users\USER\AppData\Local\Temp\"/>
+    <property name="java.version" value="11.0.30"/>
+    <property name="user.dir" value="C:\Users\USER\IdeaProjects\Task_2"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Amazon Corretto\jdk11.0.30_7\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Amazon Corretto\jdk11.0.30_7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Program Files\apache-maven-3.9.12\bin;;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Amazon.com Inc."/>
+    <property name="java.vm.version" value="11.0.30+7-LTS"/>
+    <property name="java.specification.maintenance.version" value="3"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="createNewOrder" classname="tests.OrderUnauthorizedTest" time="0.414">
+    <system-out><![CDATA[HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 14 Feb 2026 13:12:57 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 120
+Connection: keep-alive
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+ETag: W/"78-oQE36f1VidkdGeHjvHJaFrW8t0E"
+
+{
+    "success": true,
+    "name": "Метеоритный флюоресцентный spicy бургер",
+    "order": {
+        "number": 8998
+    }
+}
+]]></system-out>
+  </testcase>
+  <testcase name="fetchOrdersAndCheck" classname="tests.OrderUnauthorizedTest" time="1.78">
+    <system-out><![CDATA[HTTP/1.1 200 OK
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 14 Feb 2026 13:12:59 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 14475
+Connection: keep-alive
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+ETag: W/"388b-r9pBYg2w0r68aZusfQ9HEhtccmM"
+
+{
+    "success": true,
+    "orders": [
+        {
+            "_id": "699074d3984270001be4bcf6",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa70",
+                "61c0c5a71d1f82001bdaaa72"
+            ],
+            "status": "done",
+            "name": "Метеоритный флюоресцентный spicy бургер",
+            "createdAt": "2026-02-14T13:12:51.152Z",
+            "updatedAt": "2026-02-14T13:12:53.145Z",
+            "number": 350433
+        },
+        {
+            "_id": "699074af984270001be4bcd1",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:12:15.521Z",
+            "updatedAt": "2026-02-14T13:12:17.503Z",
+            "number": 350432
+        },
+        {
+            "_id": "699074aa984270001be4bccd",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:12:10.079Z",
+            "updatedAt": "2026-02-14T13:12:12.074Z",
+            "number": 350431
+        },
+        {
+            "_id": "699074a4984270001be4bcc3",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:12:04.375Z",
+            "updatedAt": "2026-02-14T13:12:06.385Z",
+            "number": 350430
+        },
+        {
+            "_id": "6990749e984270001be4bcc0",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:11:58.994Z",
+            "updatedAt": "2026-02-14T13:12:00.990Z",
+            "number": 350429
+        },
+        {
+            "_id": "6990747e984270001be4bcbc",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:11:26.378Z",
+            "updatedAt": "2026-02-14T13:11:28.352Z",
+            "number": 350428
+        },
+        {
+            "_id": "69907471984270001be4bcb9",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:11:13.225Z",
+            "updatedAt": "2026-02-14T13:11:15.202Z",
+            "number": 350427
+        },
+        {
+            "_id": "69907456984270001be4bcb4",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:10:46.401Z",
+            "updatedAt": "2026-02-14T13:10:48.401Z",
+            "number": 350426
+        },
+        {
+            "_id": "699073a8984270001be4bca0",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:07:52.366Z",
+            "updatedAt": "2026-02-14T13:07:54.319Z",
+            "number": 350425
+        },
+        {
+            "_id": "69907398984270001be4bc8f",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:07:36.117Z",
+            "updatedAt": "2026-02-14T13:07:38.074Z",
+            "number": 350424
+        },
+        {
+            "_id": "69907379984270001be4bc8c",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:07:05.274Z",
+            "updatedAt": "2026-02-14T13:07:07.218Z",
+            "number": 350423
+        },
+        {
+            "_id": "699072f7984270001be4bc77",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:04:55.107Z",
+            "updatedAt": "2026-02-14T13:04:57.107Z",
+            "number": 350422
+        },
+        {
+            "_id": "6990722c984270001be4bc3d",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:01:32.361Z",
+            "updatedAt": "2026-02-14T13:01:34.347Z",
+            "number": 350421
+        },
+        {
+            "_id": "69907226984270001be4bc39",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:01:26.894Z",
+            "updatedAt": "2026-02-14T13:01:28.904Z",
+            "number": 350420
+        },
+        {
+            "_id": "6990721b984270001be4bc2f",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T13:01:15.619Z",
+            "updatedAt": "2026-02-14T13:01:17.613Z",
+            "number": 350419
+        },
+        {
+            "_id": "6990711c984270001be4bbfe",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:57:00.066Z",
+            "updatedAt": "2026-02-14T12:57:02.078Z",
+            "number": 350418
+        },
+        {
+            "_id": "69907116984270001be4bbfa",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:56:54.458Z",
+            "updatedAt": "2026-02-14T12:56:56.446Z",
+            "number": 350417
+        },
+        {
+            "_id": "6990710b984270001be4bbf0",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:56:43.199Z",
+            "updatedAt": "2026-02-14T12:56:45.422Z",
+            "number": 350416
+        },
+        {
+            "_id": "699064d4984270001be4bbb4",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:04:36.109Z",
+            "updatedAt": "2026-02-14T12:04:38.096Z",
+            "number": 350415
+        },
+        {
+            "_id": "699064bf984270001be4bbb1",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:04:15.669Z",
+            "updatedAt": "2026-02-14T12:04:17.653Z",
+            "number": 350414
+        },
+        {
+            "_id": "6990647c984270001be4bbae",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:03:08.006Z",
+            "updatedAt": "2026-02-14T12:03:09.976Z",
+            "number": 350413
+        },
+        {
+            "_id": "6990646a984270001be4bbab",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:02:50.837Z",
+            "updatedAt": "2026-02-14T12:02:52.788Z",
+            "number": 350412
+        },
+        {
+            "_id": "69906457984270001be4bba8",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:02:31.024Z",
+            "updatedAt": "2026-02-14T12:02:33.007Z",
+            "number": 350411
+        },
+        {
+            "_id": "69906443984270001be4bba5",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:02:11.093Z",
+            "updatedAt": "2026-02-14T12:02:13.075Z",
+            "number": 350410
+        },
+        {
+            "_id": "69906436984270001be4bb9f",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:01:58.475Z",
+            "updatedAt": "2026-02-14T12:02:00.484Z",
+            "number": 350409
+        },
+        {
+            "_id": "69906427984270001be4bb99",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:01:43.285Z",
+            "updatedAt": "2026-02-14T12:01:45.257Z",
+            "number": 350408
+        },
+        {
+            "_id": "6990640f984270001be4bb93",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T12:01:19.372Z",
+            "updatedAt": "2026-02-14T12:01:21.331Z",
+            "number": 350407
+        },
+        {
+            "_id": "69906049984270001be4bb3a",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бургер",
+            "createdAt": "2026-02-14T11:45:13.387Z",
+            "updatedAt": "2026-02-14T11:45:15.348Z",
+            "number": 350406
+        },
+        {
+            "_id": "69906040984270001be4bb33",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f",
+                "61c0c5a71d1f82001bdaaa70"
+            ],
+            "status": "done",
+            "name": "Метеоритный флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T11:45:04.562Z",
+            "updatedAt": "2026-02-14T11:45:06.502Z",
+            "number": 350405
+        },
+        {
+            "_id": "699059df984270001be4baed",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T11:17:51.338Z",
+            "updatedAt": "2026-02-14T11:17:53.300Z",
+            "number": 350404
+        },
+        {
+            "_id": "69905451984270001be4ba99",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:54:09.934Z",
+            "updatedAt": "2026-02-14T10:54:11.884Z",
+            "number": 350403
+        },
+        {
+            "_id": "69904e78984270001be4ba57",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:29:12.680Z",
+            "updatedAt": "2026-02-14T10:29:14.626Z",
+            "number": 350402
+        },
+        {
+            "_id": "69904e35984270001be4ba54",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:28:05.788Z",
+            "updatedAt": "2026-02-14T10:28:07.736Z",
+            "number": 350401
+        },
+        {
+            "_id": "69904e20984270001be4ba51",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:27:44.330Z",
+            "updatedAt": "2026-02-14T10:27:46.301Z",
+            "number": 350400
+        },
+        {
+            "_id": "69904dfd984270001be4ba4e",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:27:09.894Z",
+            "updatedAt": "2026-02-14T10:27:11.850Z",
+            "number": 350399
+        },
+        {
+            "_id": "69904c27984270001be4ba4b",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:19:19.099Z",
+            "updatedAt": "2026-02-14T10:19:21.094Z",
+            "number": 350398
+        },
+        {
+            "_id": "69904bb2984270001be4ba48",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:17:22.901Z",
+            "updatedAt": "2026-02-14T10:17:24.878Z",
+            "number": 350397
+        },
+        {
+            "_id": "69904b94984270001be4ba45",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:16:52.182Z",
+            "updatedAt": "2026-02-14T10:16:54.159Z",
+            "number": 350396
+        },
+        {
+            "_id": "69904a0d984270001be4ba3e",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:10:21.772Z",
+            "updatedAt": "2026-02-14T10:10:23.781Z",
+            "number": 350395
+        },
+        {
+            "_id": "699049e5984270001be4ba3b",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:09:41.208Z",
+            "updatedAt": "2026-02-14T10:09:43.187Z",
+            "number": 350394
+        },
+        {
+            "_id": "69904952984270001be4ba38",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:07:14.288Z",
+            "updatedAt": "2026-02-14T10:07:16.299Z",
+            "number": 350393
+        },
+        {
+            "_id": "6990492b984270001be4ba35",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:06:35.450Z",
+            "updatedAt": "2026-02-14T10:06:37.444Z",
+            "number": 350392
+        },
+        {
+            "_id": "699048f5984270001be4ba32",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:05:41.875Z",
+            "updatedAt": "2026-02-14T10:05:43.867Z",
+            "number": 350391
+        },
+        {
+            "_id": "69904881984270001be4ba2f",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:03:45.917Z",
+            "updatedAt": "2026-02-14T10:03:47.958Z",
+            "number": 350390
+        },
+        {
+            "_id": "699047ee984270001be4ba2c",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T10:01:18.311Z",
+            "updatedAt": "2026-02-14T10:01:20.325Z",
+            "number": 350389
+        },
+        {
+            "_id": "699042cb984270001be4ba04",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa73",
+                "61c0c5a71d1f82001bdaaa6d"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный space бургер",
+            "createdAt": "2026-02-14T09:39:23.148Z",
+            "updatedAt": "2026-02-14T09:39:25.110Z",
+            "number": 350388
+        },
+        {
+            "_id": "69903a13984270001be4b9b3",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бургер",
+            "createdAt": "2026-02-14T09:02:11.190Z",
+            "updatedAt": "2026-02-14T09:02:13.128Z",
+            "number": 350387
+        },
+        {
+            "_id": "69902904984270001be4b962",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T07:49:24.959Z",
+            "updatedAt": "2026-02-14T07:49:26.926Z",
+            "number": 350386
+        },
+        {
+            "_id": "699028ff984270001be4b95f",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T07:49:19.592Z",
+            "updatedAt": "2026-02-14T07:49:21.587Z",
+            "number": 350385
+        },
+        {
+            "_id": "699028f1984270001be4b954",
+            "ingredients": [
+                "61c0c5a71d1f82001bdaaa6d",
+                "61c0c5a71d1f82001bdaaa6f"
+            ],
+            "status": "done",
+            "name": "Флюоресцентный бессмертный бургер",
+            "createdAt": "2026-02-14T07:49:05.430Z",
+            "updatedAt": "2026-02-14T07:49:07.401Z",
+            "number": 350384
+        }
+    ],
+    "total": 350433,
+    "totalToday": 101
+}
+]]></system-out>
+  </testcase>
+  <testcase name="createOrderWithIncorrectIngredients" classname="tests.OrderUnauthorizedTest" time="0.865">
+    <system-out><![CDATA[HTTP/1.1 500 Internal Server Error
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 14 Feb 2026 13:12:59 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 148
+Connection: keep-alive
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Error</title>
+  </head>
+  <body>
+    <pre>Internal Server Error</pre>
+  </body>
+</html>
+]]></system-out>
+  </testcase>
+  <testcase name="createOrderWithEmptyBody" classname="tests.OrderUnauthorizedTest" time="0.268">
+    <system-out><![CDATA[HTTP/1.1 400 Bad Request
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sat, 14 Feb 2026 13:13:00 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 61
+Connection: keep-alive
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+ETag: W/"3d-2OjyVsQbcrSKTjJtjBJ5FY7GEPQ"
+
+{
+    "success": false,
+    "message": "Ingredient ids must be provided"
+}
+]]></system-out>
+  </testcase>
+</testsuite>
